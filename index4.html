@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Agency Services</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS with new color scheme */
+        :root {
+            --primary: #BA73FF;
+            --primary-light: #DF81CD;
+            --secondary: #F9F4FB;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+            --background: #F9F4FB;
+        }
+
+        .dark {
+            --primary: #8A4FFF;
+            --primary-light: #C261B5;
+            --secondary: #1A1A2E;
+            --text-color: #F9F4FB;
+            --card-bg: #16213E;
+            --background: #0F3460;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(186, 115, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(186, 115, 255, 0.2);
+        }
+
+        .dark .card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .filter-button.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(186, 115, 255, 0.4);
+        }
+
+        /* Modal styles */
+        .modal {
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Service grid styles */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes animate-blob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(20px, -20px) scale(1.1); }
+            50% { transform: translate(0, 20px) scale(0.9); }
+            75% { transform: translate(-20px, -20px) scale(1.1); }
+        }
+
+        .animate-blob {
+            animation: animate-blob 7s infinite ease-in-out;
+        }
+
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+
+        .animate-bounce { animation: bounce 2s infinite; }
+
+        /* Hero section gradient */
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        }
+
+        /* Text gradient */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--text-color));
+            color: white;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Dark/Light Mode Toggle -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-3 rounded-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white shadow-lg transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+        <i id="moon-icon" class="fas fa-moon text-lg hidden"></i>
+        <i id="sun-icon" class="fas fa-sun text-lg"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <section class="relative hero-gradient text-white py-24 px-6 sm:px-10 lg:px-20 overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-32 h-32 bg-white rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-blob"></div>
+            <div class="absolute top-0 right-0 w-32 h-32 bg-white rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+            <div class="absolute bottom-0 left-1/2 w-32 h-32 bg-white rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+        </div>
+        
+        <div class="relative max-w-6xl mx-auto z-10">
+            <!-- Logo Section -->
+            <div class="flex items-center justify-center mb-8" data-aos="fade-down" data-aos-duration="500">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-lg bg-white bg-opacity-20 flex items-center justify-center mr-3">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                            <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+                            <path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                        </svg>
+                    </div>
+                    <span class="text-4xl font-bold tracking-tight">PixelCraft</span>
+                </div>
+            </div>
+            
+            <div class="text-center" data-aos="fade-up" data-aos-duration="800">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                    <span class="block">Creative Solutions for</span>
+                    <span class="block text-gradient">Your Digital Success</span>
+                </h1>
+                <p class="text-lg sm:text-xl max-w-3xl mx-auto mb-8 opacity-90">
+                    We craft stunning digital experiences that help brands stand out and connect with their audience.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#contact" class="inline-flex items-center justify-center px-8 py-3 rounded-full font-semibold text-lg bg-white text-purple-600 shadow-lg hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl">
+                        Get Started
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </a>
+                    <a href="#services" class="inline-flex items-center justify-center px-8 py-3 rounded-full font-semibold text-lg border-2 border-white text-white hover:bg-white hover:bg-opacity-10 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                        Explore Services
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scrolling indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#services" class="text-white">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-16 px-6 sm:px-10 lg:px-20">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12" data-aos="fade-up" data-aos-delay="200">Our Core Services</h2>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up" data-aos-delay="300">
+                <button class="filter-button px-6 py-2 rounded-full font-medium border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-200 hover:bg-purple-100 dark:hover:bg-purple-900 transition-all duration-300 active" data-category="all">All</button>
+                <button class="filter-button px-6 py-2 rounded-full font-medium border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-200 hover:bg-purple-100 dark:hover:bg-purple-900 transition-all duration-300" data-category="design">Branding & Design</button>
+                <button class="filter-button px-6 py-2 rounded-full font-medium border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-200 hover:bg-purple-100 dark:hover:bg-purple-900 transition-all duration-300" data-category="marketing">Marketing</button>
+                <button class="filter-button px-6 py-2 rounded-full font-medium border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-200 hover:bg-purple-100 dark:hover:bg-purple-900 transition-all duration-300" data-category="development">Development</button>
+                <button class="filter-button px-6 py-2 rounded-full font-medium border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-200 hover:bg-purple-100 dark:hover:bg-purple-900 transition-all duration-300" data-category="content">Content & Motion</button>
+            </div>
+
+            <!-- Services Grid -->
+            <div id="services-grid" class="services-grid">
+                <!-- Service cards will be dynamically inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section id="contact" class="hero-gradient text-white py-16 px-6 sm:px-10 lg:px-20 text-center">
+        <div class="max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+                Ready to transform your brand?
+            </h2>
+            <p class="text-lg sm:text-xl mb-8 opacity-90">
+                Let's collaborate on your next big idea. We're eager to hear about your project!
+            </p>
+            <button class="cta-button inline-block bg-white text-purple-600 px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:bg-gray-100 transition-all duration-300 ease-in-out transform hover:scale-105" onclick="openContactModal()">
+                Contact Us Now
+            </button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container py-8 text-center">
+            <p>&copy; 2023 PixelCraft Creative Agency. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Popup for Service Details -->
+    <div id="service-modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden z-[100]">
+        <div class="modal-content card max-w-2xl w-full rounded-xl p-8 shadow-2xl relative bg-white dark:bg-gray-800" data-aos="zoom-in">
+            <button id="modal-close-button" class="absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 text-3xl font-bold transition-colors duration-200">
+                &times;
+            </button>
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+                <div id="modal-icon-container" class="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center rounded-lg flex-shrink-0 mb-4 md:mb-0 bg-purple-100 dark:bg-purple-900 p-3">
+                    <div id="modal-icon" class="text-5xl text-purple-600 dark:text-purple-400"></div>
+                </div>
+                <div class="text-center md:text-left flex-grow">
+                    <h2 id="modal-title" class="text-3xl font-bold mb-3 text-gray-900 dark:text-white"></h2>
+                    <p id="modal-description" class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed"></p>
+                </div>
+            </div>
+            <div class="mt-6 flex justify-center md:justify-end">
+                <a id="modal-link" href="#" target="_blank" class="inline-block bg-purple-600 text-white px-6 py-2 rounded-full font-medium hover:bg-purple-700 transition-all duration-300">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-in-out'
+        });
+
+        // Service Data with Font Awesome icons
+        const serviceData = [
+            {
+                id: 'branding-logo',
+                category: 'design',
+                icon: '<i class="fas fa-palette text-purple-600 dark:text-purple-400"></i>',
+                title: 'Branding & Logo Design',
+                shortDescription: 'Crafting unique brand identities that resonate.',
+                longDescription: 'We develop comprehensive brand strategies, memorable logos, and complete visual guidelines that define your presence and connect with your audience. Our approach ensures your brand truly stands out in a crowded market.',
+                link: '#'
+            },
+            {
+                id: 'social-media',
+                category: 'marketing',
+                icon: '<i class="fas fa-hashtag text-purple-600 dark:text-purple-400"></i>',
+                title: 'Social Media Marketing',
+                shortDescription: 'Engage, grow, and convert with strategic social campaigns.',
+                longDescription: 'Our social media experts create dynamic content, manage campaigns, and analyze performance across platforms to build strong communities and drive measurable results for your business. From content calendars to paid ads, we cover it all.',
+                link: '#'
+            },
+            {
+                id: 'web-development',
+                category: 'development',
+                icon: '<i class="fas fa-code text-purple-600 dark:text-purple-400"></i>',
+                title: 'Web Development',
+                shortDescription: 'Building responsive, high-performance websites.',
+                longDescription: 'From custom web applications to robust e-commerce platforms, we build fast, secure, and scalable websites tailored to your specific needs. We focus on cutting-edge technologies and seamless user experiences.',
+                link: '#'
+            },
+            {
+                id: 'seo-optimization',
+                category: 'marketing',
+                icon: '<i class="fas fa-search text-purple-600 dark:text-purple-400"></i>',
+                title: 'SEO Optimization',
+                shortDescription: 'Boost your visibility and rank higher in search results.',
+                longDescription: 'Improve your organic search rankings and drive more qualified traffic with our expert SEO strategies. We cover everything from keyword research and on-page optimization to technical SEO and link building.',
+                link: '#'
+            },
+            {
+                id: 'graphic-design',
+                category: 'design',
+                icon: '<i class="fas fa-pencil-ruler text-purple-600 dark:text-purple-400"></i>',
+                title: 'Graphic Design',
+                shortDescription: 'Visually stunning designs for all your marketing needs.',
+                longDescription: 'Our graphic designers create compelling visuals for brochures, presentations, advertisements, and digital assets that capture attention and communicate your message effectively. We bring your ideas to life with creativity and precision.',
+                link: '#'
+            },
+            {
+                id: 'ecommerce-solutions',
+                category: 'development',
+                icon: '<i class="fas fa-shopping-cart text-purple-600 dark:text-purple-400"></i>',
+                title: 'E-commerce Solutions',
+                shortDescription: 'Powerful online stores designed for sales success.',
+                longDescription: 'We build secure, user-friendly, and high-converting e-commerce websites using platforms like Shopify, WooCommerce, and custom solutions. Our focus is on optimizing the shopping experience to maximize your revenue.',
+                link: '#'
+            },
+            {
+                id: 'content-creation',
+                category: 'content',
+                icon: '<i class="fas fa-pen-fancy text-purple-600 dark:text-purple-400"></i>',
+                title: 'Content Creation',
+                shortDescription: 'Engaging content that tells your brand\'s story.',
+                longDescription: 'From blog posts and articles to website copy and case studies, we produce high-quality, SEO-friendly content that educates, entertains, and converts your audience. Let us craft words that resonate with your target market.',
+                link: '#'
+            },
+            {
+                id: 'motion-graphics',
+                category: 'content',
+                icon: '<i class="fas fa-film text-purple-600 dark:text-purple-400"></i>',
+                title: 'Motion Graphics',
+                shortDescription: 'Dynamic animations to captivate your audience.',
+                longDescription: 'Bring your ideas to life with stunning motion graphics and animated videos. Perfect for explainers, advertisements, and social media, motion graphics are a powerful tool for visual storytelling and engagement.',
+                link: '#'
+            }
+        ];
+
+        // DOM Elements
+        const servicesGrid = document.getElementById('services-grid');
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const serviceModal = document.getElementById('service-modal');
+        const modalCloseButton = document.getElementById('modal-close-button');
+        const modalIcon = document.getElementById('modal-icon');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalLink = document.getElementById('modal-link');
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        // Render Services
+        function renderServices(filterCategory = 'all') {
+            servicesGrid.innerHTML = '';
+            let delay = 0;
+
+            serviceData.forEach(service => {
+                if (filterCategory === 'all' || service.category === filterCategory) {
+                    const card = document.createElement('div');
+                    card.className = `service-card-container w-full h-full`;
+                    card.dataset.category = service.category;
+                    card.dataset.aos = "fade-up";
+                    card.dataset.aosDelay = delay;
+
+                    card.innerHTML = `
+                        <div class="card p-6 rounded-xl shadow-lg flex flex-col h-full hover:shadow-xl transition-all duration-300 cursor-pointer" data-id="${service.id}">
+                            <div class="text-5xl mb-4 flex items-center justify-center h-16">${service.icon}</div>
+                            <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">${service.title}</h3>
+                            <p class="text-gray-700 dark:text-gray-300 text-sm flex-grow mb-4">${service.shortDescription}</p>
+                            <button class="more-info-button inline-block bg-purple-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-purple-700 transition-colors duration-300 self-start">
+                                More Info
+                            </button>
+                        </div>
+                    `;
+                    servicesGrid.appendChild(card);
+                    delay += 100;
+                }
+            });
+            AOS.refresh();
+        }
+
+        // Filter Buttons
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                renderServices(button.dataset.category);
+            });
+        });
+
+        // Modal Handling
+        servicesGrid.addEventListener('click', (e) => {
+            const card = e.target.closest('.card');
+            const button = e.target.closest('.more-info-button');
+            
+            if (card && button) {
+                const service = serviceData.find(s => s.id === card.dataset.id);
+                if (service) {
+                    modalIcon.innerHTML = service.icon;
+                    modalTitle.textContent = service.title;
+                    modalDescription.textContent = service.longDescription;
+                    modalLink.href = service.link;
+                    
+                    serviceModal.classList.remove('hidden');
+                    setTimeout(() => serviceModal.classList.add('open'), 10);
+                }
+            }
+        });
+
+        modalCloseButton.addEventListener('click', () => {
+            serviceModal.classList.remove('open');
+            setTimeout(() => serviceModal.classList.add('hidden'), 300);
+        });
+
+        serviceModal.addEventListener('click', (e) => {
+            if (e.target === serviceModal) {
+                serviceModal.classList.remove('open');
+                setTimeout(() => serviceModal.classList.add('hidden'), 300);
+            }
+        });
+
+        // Dark Mode Toggle (Fixed)
+        function updateTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                localStorage.theme = 'light';
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+        }
+
+        // Check initial theme
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        updateTheme();
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            updateTheme();
+        });
+
+         
+       
+        // Initial render
+        renderServices('all');
+      
+    </script>
+</body>
+</html>
